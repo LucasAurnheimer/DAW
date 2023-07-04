@@ -14,6 +14,9 @@ if (!$mysqli) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+
+     $salas = ['1', '2', '3', '4', '5'];
+     $numSalas = count($salas);
    
     $candidatos = $_POST['candidatos'];
   
@@ -23,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Rg = $candidato['Rg'];
         $email = $candidato['email'];
 		$cargo = $candidato['cargo'];
-		$sala = null;
+		$sala = $salas[array_rand($salas)];
 
         $sql = "INSERT INTO candidatosinfo (nome, cpf, Rg, email, cargo, sala) VALUES ('$nome', '$cpf', '$Rg','$email', '$cargo','$sala')";
         $resultado = mysqli_query($mysqli, $sql);
@@ -81,7 +84,7 @@ mysqli_close($mysqli);
                 <input type="text" name="candidatos[0][cargo]" required>
 				<br>
 				
-			 <h3> a sala que o candidato fara a prova será informada em breve </h3>
+			 <h3> a sala que o candidato fara a prova será determinada em breve </h3>
             </div>
         </div>
 
@@ -92,15 +95,15 @@ mysqli_close($mysqli);
     let contador = 0;
     const candidatosContainer = document.getElementById('candidatos-container');
 
-    function addAluno() {
+    function addCandidato() {
         contador++;
         const div = document.createElement('div');
         div.classList.add('candidato');
         div.innerHTML = `
 		
-                <label for="nome">Nome:</label>
+                <label for ="nome">Nome:</label>
                 <input type="text" name="candidatos[${contador}][nome]" required>
-
+			
                 <label for="cpf">CPF:</label>
                 <input type="text" name="candidatos[${contador}][cpf]" required>
 
@@ -113,11 +116,10 @@ mysqli_close($mysqli);
 				
 				<label for="cargo">Cargo:</label>
                 <input type="text" name="candidatos[${contador}][cargo]" required>
-				
-				
             `;
         candidatosContainer.appendChild(div);
     }
+
     </script>
 </body>
 
