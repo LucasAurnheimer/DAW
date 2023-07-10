@@ -1,6 +1,5 @@
 <?php
 
-
 function listarCandidatosEmOrdemAlfabetica() {
     
     $conn = new mysqli("localhost", "root", "", "candidatos");
@@ -38,3 +37,5 @@ echo "Lista de Candidatos Presentes:<br>";
 listarCandidatosEmOrdemAlfabetica();
 
 ?>
+
+<a href="menu.php">Voltar para o Menu</a>
